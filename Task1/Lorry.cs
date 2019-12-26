@@ -16,11 +16,10 @@ namespace Task1
         {
             Capacity = capacity;
         }
-        public void LorryInfo()
+        public override void CarInfo()
         {
-            CarInfo();
+            base.CarInfo();
             Console.WriteLine("Capacity: " + Capacity);
-
         }
 
     }

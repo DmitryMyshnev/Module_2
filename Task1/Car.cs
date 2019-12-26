@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Task1
 {
-internal class Car
+     class Car
     {
         public string Manufacturer { get; set; }
         public int Wight { get; set; }
@@ -19,7 +19,7 @@ internal class Car
         {
             this.Power = power;
         }
-        public void CarInfo()
+        public virtual void CarInfo()
         {
             Console.WriteLine("Manufacturer: " + Manufacturer);
             Console.WriteLine("Wight: " + Wight);

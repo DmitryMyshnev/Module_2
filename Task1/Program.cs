@@ -7,11 +7,11 @@ namespace Task1
         static void Main(string[] args)
         {
            var lorry = new Lorry("BMW", 1500,200,2000);
-           lorry.CarInfo();
+           
            lorry.ChangePower(210);
            lorry.CarInfo();
            lorry.ChengeCapacity(2500);
-           lorry.LorryInfo();
+           lorry.CarInfo();
                                
        }
     }
