@@ -2,17 +2,16 @@
 
 namespace Task1
 {
-    class Program
+    
+    class Program 
     {
         static void Main(string[] args)
         {
-           var lorry = new Lorry("BMW", 1500,200,2000);
+           var lorry = new Lorry("BMW", 1500,200,2000);       
+             lorry.ChangePower(210);
+             lorry.CarInfo();           
+             lorry.CarInfo();
            
-           lorry.ChangePower(210);
-           lorry.CarInfo();
-           lorry.ChengeCapacity(2500);
-           lorry.CarInfo();
-                               
-       }
+        }
     }
 }

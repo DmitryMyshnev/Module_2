@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Task1
 {
-    class Lorry : Car
+   public class Lorry : Car
 
     {
         public int Capacity { get; set; }
@@ -12,15 +12,17 @@ namespace Task1
         {
             Capacity = capacity;
         }
-        public void ChengeCapacity(int capacity)
+        public   void ChengeCapacity(int capacity)
         {
-            Capacity = capacity;
+           this.Capacity = capacity;
         }
-        public override void CarInfo()
+        public  void CarInfo()
         {
-            base.CarInfo();
+            Console.WriteLine("Manufacturer: " + Manufacturer);
+            Console.WriteLine("Wight: " + Wight);
+            Console.WriteLine("Power: " + Power);
             Console.WriteLine("Capacity: " + Capacity);
         }
-
+        
     }
 }
