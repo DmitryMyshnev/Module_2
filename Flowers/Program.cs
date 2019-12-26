@@ -5,7 +5,7 @@ namespace Flowers
     class Program
     {
         static Tulip[] Bouquet = new Tulip[7];
-        static int CostTugeser()
+        static int CostTogether()
         {
             int cost = 0;
             for (int i = 0; i < Bouquet.Length; i++)
@@ -36,7 +36,7 @@ namespace Flowers
             {
                 Console.WriteLine(item.Name);
             }
-            Console.WriteLine("Cost tugeser: " + CostTugeser());
+            Console.WriteLine("Cost tugeser: " + CostTogether());
             Console.WriteLine("Count: " + Bouquet.Length);
         }
         

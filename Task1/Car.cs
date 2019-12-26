@@ -14,7 +14,7 @@ namespace Task1
             this.Manufacturer = manufacturer;
             this.Wight = wight;
             this.Power = power;
-        }
+        } 
         public void ChangePower(int power)
         {
             this.Power = power;
