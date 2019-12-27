@@ -23,6 +23,11 @@ namespace Task1
             Console.WriteLine("Power: " + Power);
             Console.WriteLine("Capacity: " + Capacity);
         }
-        
+        public override void OverrideChangeCapacity(int capacity)
+        {
+            base.OverrideChangeCapacity(capacity);
+            
+        }
+
     }
 }

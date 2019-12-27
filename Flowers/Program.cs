@@ -4,40 +4,112 @@ namespace Flowers
 {
     class Program
     {
-        static Tulip[] Bouquet = new Tulip[7];
-        static int CostTogether()
+        static Bouquet assortment = new Bouquet(5);
+        static int indexOfAssortment ;
+        static bool CheckMistake(string inputText)
         {
-            int cost = 0;
-            for (int i = 0; i < Bouquet.Length; i++)
+            bool statusOfSearch = false;
+            if (String.IsNullOrEmpty(inputText))
             {
-                cost += Bouquet[i].Cost;
+                Console.WriteLine("Incorrect input");
+                return statusOfSearch;
             }
-            return cost;
+            // inputText = inputText.ToUpper();
+            for (int i = 0; i < assortment.arrLength; i++)
+            {
+                if (inputText.StartsWith(assortment[i].Name))
+                {
+                    statusOfSearch = true;
+                    indexOfAssortment = i;
+                    break;
+                }
+                else
+                    statusOfSearch = false;
+            }
+
+            if (inputText == "STOP")
+                return statusOfSearch = true;
+
+            if (!statusOfSearch)
+            {
+                Console.WriteLine("Not found flowers");
+            }
+            string[] text = inputText.Split(',');
+            if (text.Length < 2)
+            {
+                statusOfSearch = false;
+                Console.WriteLine("Incorrect input");
+            }
+            else
+            {
+                int.TryParse(text[1], out int quantity);
+                if (quantity == 0)
+                {
+                    statusOfSearch = false;
+                    Console.WriteLine("Incorrect  input quantity");
+                }
+            }
+            return statusOfSearch;
         }
         static void Main(string[] args)
         {
-           
-            Tulip RubyRed = new Tulip("Ruby Red",500);
-            Tulip PrinceOfAustria = new Tulip("Prince of Austria",600);
-            Tulip PrinsCarnaval = new Tulip("Prins Carnaval",450);
-            Tulip PinkTrophy = new Tulip("Pink Trophy",800);
-            Tulip Flair = new Tulip("Flair",750);
-          
-            Bouquet[0] = (Tulip)RubyRed.Clone();
-            Bouquet[1] = (Tulip)PrinceOfAustria.Clone();
-            Bouquet[2] = (Tulip)PrinceOfAustria.Clone();
-            Bouquet[3] = (Tulip)PinkTrophy.Clone();
-            Bouquet[4] = (Tulip)Flair.Clone();
-            Bouquet[5] = (Tulip)Flair.Clone();
-            Bouquet[6] = (Tulip)Flair.Clone();
+            
+            var range = new Bouquet(5);
+            string yourChoice = null;
+            Flower chamomile = new Flower("CHAMOMILE", 500);
+            Flower chrysoneme = new Flower("CHRYSONEME", 600);
+            Flower lily = new Flower("LILY", 450);
+            Flower tulip = new Flower("TULIP", 800);
+            Flower violet = new Flower("VIOLET", 750);
 
-            Console.WriteLine("Your bouquet:");
-            foreach (var item in Bouquet)
+            assortment[0] = chamomile;
+            assortment[1] = chrysoneme;
+            assortment[2] = lily;
+            assortment[3] = tulip;
+            assortment[4] = violet;
+            
+            for (int i = 0; i < range.assortment.Length; i++)
             {
-                Console.WriteLine(item.Name);
+                Console.WriteLine(assortment[i].Name + ": " + assortment[i].Cost + ",grn");
             }
-            Console.WriteLine("Cost tugeser: " + CostTogether());
-            Console.WriteLine("Count: " + Bouquet.Length);
+            Console.WriteLine("");
+            Console.WriteLine("Choice flowers in format: 'Name of flower','quantity'. For example: Tulip,3 ");
+            string choice;
+            int quantity = 0;
+            choice = Console.ReadLine();
+            choice = choice.ToUpper();
+           
+            while (choice != "STOP")
+            {                         
+                while (!CheckMistake(choice))
+                {
+                    choice = Console.ReadLine();
+                }
+                string[] text = choice.Split(',');
+                int.TryParse(text[1], out int count);
+                quantity += count;
+                yourChoice += (choice + ",");
+                choice = Console.ReadLine();
+                choice = choice.ToUpper();
+            }
+            var bouquets = new Bouquet(quantity);
+            string[] s;
+            s = yourChoice.Split(',');
+            for (int i = 0,j=0; i < s.Length; i++)
+            {
+                if (s[i] == assortment[j].Name)
+                    bouquets[0] = assortment[j];
+                else
+                    j++;
+            } 
+            
+            
+            //foreach (var item in Bouquet)
+            //{
+            //    Console.WriteLine(item.Name);
+            //}
+            //Console.WriteLine("Total cost : " + TotalCost());
+            //Console.WriteLine("Count: " + Bouquet.Length);
         }
         
     }
