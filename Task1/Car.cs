@@ -19,6 +19,7 @@ namespace Task1
         {
             this.Power = power;
         }
+
                     
     }
 }
