@@ -9,10 +9,6 @@ namespace Flowers
         internal string Name { get; set; }
         internal int Cost { get; set; }
        
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
         public Flower(string name, int cost)
         {
             this.Name = name;

@@ -7,13 +7,13 @@ namespace Flowers
     class Bouquet 
     {
         private Flower[] bouquet;
-        public Flower[] assortment;       
+             
         public Bouquet(int size) 
         {
             bouquet = new Flower[size];
-            assortment = new Flower[size];
+           
         }
-        public int arrLength => bouquet.Length;
+        public int Length => bouquet.Length;
         public Flower this[int index]
         {
             get

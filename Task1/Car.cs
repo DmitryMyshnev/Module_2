@@ -19,7 +19,11 @@ namespace Task1
         {
             this.Power = power;
         }
+        public virtual void OverrideChangeCapacity(int capacity)
+        {
 
-                    
+        }
+
+
     }
 }
