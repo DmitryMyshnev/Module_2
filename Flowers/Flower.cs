@@ -4,18 +4,20 @@ using System.Text;
 
 namespace Flowers
 {
-   internal class Tulip : ICloneable
+    class Flower 
     {
         internal string Name { get; set; }
         internal int Cost { get; set; }
+       
         public object Clone()
         {
             return this.MemberwiseClone();
         }
-        public Tulip(string name, int cost)
+        public Flower(string name, int cost)
         {
             this.Name = name;
             this.Cost = cost;
+            
         }
     }
 }
