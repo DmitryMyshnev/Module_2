@@ -14,12 +14,9 @@ namespace MyCollection
             var rnd = new Random();
             for (int i = 0; i < 10; i++)
             {
-                simpleNumbers.Add(rnd.Next(min, max));
-
+                simpleNumbers.Add(rnd.Next(min, max));               
             }
-
         }
-
         public int Current
         {
             get
@@ -28,7 +25,6 @@ namespace MyCollection
             }
         }
         object IEnumerator.Current => throw new NotImplementedException();
-
 
         public bool MoveNext()
         {

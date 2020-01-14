@@ -7,13 +7,13 @@ namespace MyCollection
     {
         static void Main(string[] args)
         {
-            var ranList = new SimpleNumbers(1, 10);
+            var rndList = new SimpleNumbers(1, 10);
 
-            foreach (var item in ranList.simpleNumbers)
+            foreach (var item in rndList.simpleNumbers)
             {
-                if (ranList.SimpleCheck())
+                if (rndList.SimpleCheck())
                     Console.WriteLine(item);
-                ranList.MoveNext();
+                rndList.MoveNext();
             }
         }
     }
