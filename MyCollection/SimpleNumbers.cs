@@ -5,9 +5,10 @@ using System.Text;
 
 namespace MyCollection
 {
-    class SimpleNumbers : IEnumerator
+    class SimpleNumbers : IEnumerable
     {
-        public List<int> simpleNumbers = new List<int>(10);
+        // public List<int> simpleNumbers = new List<int>(10);
+        private int[] simpleNumbers;
         int index = 0;
         public SimpleNumbers(int min, int max)
         {
@@ -24,36 +25,41 @@ namespace MyCollection
                 return simpleNumbers[index];
             }
         }
-        object IEnumerator.Current => throw new NotImplementedException();
+       // object IEnumerator.Current => throw new NotImplementedException();
 
-        public bool MoveNext()
+        public IEnumerator GetEnumerator()
         {
-            if (index <= 10)
-            {
-                index++;
-                return true;
-            }
-            else
-                return false;
+            return simpleNumbers.GetEnumerator(IEnumerator);
         }
 
-        public void Reset()
-        {
-            index = 0;
-        }
-        public bool SimpleCheck()
-        {
-            bool check = true;
-            for (int i = 2; i < Current; i++)
-            {
-                if ((Current % i) != 0)
-                    check = true;
-                else
-                    return false;
+        //public bool MoveNext()
+        //{
+        //    if (index <= 10)
+        //    {
+        //        index++;
+        //        return true;
+        //    }
+        //    else
+        //        return false;
+        //}
 
-            }
-            return check;
-        }
+        //public void Reset()
+        //{
+        //    index = 0;
+        //}
+        //public bool SimpleCheck()
+        //{
+        //    bool check = true;
+        //    for (int i = 2; i < Current; i++)
+        //    {
+        //        if ((Current % i) != 0)
+        //            check = true;
+        //        else
+        //            return false;
+
+        //    }
+        //    return check;
+        //}
     }
 }
 
