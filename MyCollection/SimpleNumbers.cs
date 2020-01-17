@@ -7,7 +7,7 @@ namespace MyCollection
 {
   public  class SimpleNumbers : IEnumerable
     {
-       // public List<int> simpleNumbers = new List<int>(10);
+     
         private int[] simpleNum;  
         
         public SimpleNumbers(int min, int max)
