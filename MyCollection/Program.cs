@@ -7,14 +7,15 @@ namespace MyCollection
     {
         static void Main(string[] args)
         {
-            var rndList = new SimpleNumbers(1, 10);
-
-            foreach (var item in rndList.simpleNumbers)
+            var rndList = new SimpleNumbers(1, 30);
+            int count = 0;
+            foreach (var item in rndList)
             {
-                if (rndList.SimpleCheck())
+                if (rndList.SimpleCheck(count))
                     Console.WriteLine(item);
-                rndList.MoveNext();
+                count++;
             }
+            Console.ReadLine();
         }
     }
 }

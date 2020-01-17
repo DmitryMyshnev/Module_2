@@ -1,40 +1,53 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace MyCollection
 {
-    class Enum :IEnumerator
+    class Enum : IEnumerator
     {
-
-    }
-    object IEnumerator.Current => throw new NotImplementedException();
-    public bool MoveNext()
-    {
-        if (index <= 10)
+        private int index = -1;
+        private int[] data;
+        public Enum(int[] input)
         {
-            index++;
-            return true;
+            this.data = input;
         }
-        else
-            return false;
-    }
 
-    public void Reset()
-    {
-        index = 0;
-    }
-    public bool SimpleCheck()
-    {
-        bool check = true;
-        for (int i = 2; i < Current; i++)
+        public int Index
         {
-            if ((Current % i) != 0)
-                check = true;
+            get
+            {
+                return index;
+            }
+        }
+        object IEnumerator.Current 
+        {
+            get
+            {
+                if (index == -1 || index >= data.Length)
+                {
+                    throw new Exception();
+                }              
+                    return data[index];
+            }
+        }
+  
+        public bool MoveNext()
+        {
+            if (index < data.Length-1)
+            {
+                index++;
+                return true;
+            }
             else
                 return false;
-
         }
-        return check;
+
+        public void Reset()
+        {
+            index = -1;
+        }
     }
 }
