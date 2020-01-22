@@ -8,59 +8,45 @@ namespace SearchFile
 {
     class Program
     {
-        static string  tempPath = "";
-        static string pathDesktop = "";
-        static  string dirNotPermission = "";
-        static bool SearchDesktop(string pathOfUserDir)
-        {         
-            string[] dirs = Directory.GetDirectories(pathOfUserDir);
-            foreach (string item in dirs)
-            {
-                tempPath = item;
-                if (item != dirNotPermission)
-                {
-                    string[] pathDirInside = Directory.GetDirectories(item);
-                    foreach (var s in pathDirInside)
-                    {
-                        if (s.Contains("Desktop"))
-                        {
-                            pathDesktop = Path.Combine(pathOfUserDir, "Desktop");
-                            return false;
-                        }
-                    }
-                }
-            }
-            return true;
-        }
+          
+       
         static void Main(string[] args)
         {
+                              
+            string pathDesk;
             bool searchDesktop = true;
            
             string currentPathFile = "";
             string currentPathDir = "";
             string systemPath = Environment.GetFolderPath(Environment.SpecialFolder.System);
             string pathOfUserDir = Path.Combine (Path.GetPathRoot(systemPath), "Users");
-
-            // var currenDirInfo = new DirectoryInfo(pathDesktop);
-
+            currentPathDir = @"C:\1Projects";
+           
+            var sd = new DirSearch();
             while (searchDesktop)
             {
                 try
                 {
-                   searchDesktop = SearchDesktop(pathOfUserDir);
-                    if (searchDesktop)
-                    {
-                        Console.WriteLine("Not found Desktop");
-                        break;
-                    }
+                    searchDesktop = sd.SearchDesktop(pathOfUserDir);
+                    pathDesk = sd.PathDesktop;
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    dirNotPermission = tempPath;
+                    sd.DirNotPermission = sd.TempPath;
                     continue;
                 }
             }
 
+            while(!sd.IsFileInclude(currentPathDir))
+            {
+                foreach (var item in sd.FullPathToFile)
+                {
+                    currentPathDir = Path.Combine(currentPathDir, item);
+                }
+            }
+            
+
+            Console.ReadLine();
             //try
             //{
             //    string[] fiels = Directory.GetFiles(pathDesktop);
@@ -74,14 +60,14 @@ namespace SearchFile
 
             //    Console.WriteLine("no accsept");
             //}
-           // var tm = dirInfo.CreationTime.DayOfYear;
+            // var tm = dirInfo.CreationTime.DayOfYear;
 
             // Console.WriteLine(tm);
             //// Console.WriteLine($"dir together: {dirInfo.GetDirectories(dirName)}");
             // Console.WriteLine($"Полное название каталога: {dirInfo.FullName}");
             // Console.WriteLine($"Время создания каталога: {dirInfo.CreationTime}");
             // Console.WriteLine($"Корневой каталог: {dirInfo.Root}");
-            Console.ReadLine();
+
         }
     }
 }
