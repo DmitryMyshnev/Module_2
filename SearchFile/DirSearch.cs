@@ -12,12 +12,15 @@ namespace SearchFile
         private string tempPath;
         private string dirNotPermission;
         private string pathDesktop;
-        private List<string> fullPathToFile;
+        private List<string> listOfDirs;
         private DirectoryInfo[] currentDirInclude;
         private FileInfo[] currentFileInDir;
         private DateTime currentTime;
+       public int countFiles;
+       public int countDirs;
         public DirSearch() : base()
         {
+            listOfDirs = new List<string>();
         }
 
         public string PathDesktop
@@ -35,35 +38,41 @@ namespace SearchFile
             get => tempPath; 
             set => tempPath = value;
         }
-        public List<string> FullPathToFile 
+        public List<string> ListOfDirs
         {
-            get => fullPathToFile;
-            set => fullPathToFile = value;
+            get => listOfDirs;
+            set => listOfDirs = value;
         }
-      //  ArrayList currentNameDir = new ArrayList();
+        public DirectoryInfo[] CurrentDirInclude
+        {
+            get => currentDirInclude;
+            set => currentDirInclude = value;
+        }
+
         public bool IsFileInclude(string path)
         {
             var di = new DirectoryInfo(path);
-            fullPathToFile = new List<string>();
-          
-            currentDirInclude = di.GetDirectories();
-            if (currentDirInclude.Length !=0 )
+                      
+            CurrentDirInclude = di.GetDirectories();
+            if (CurrentDirInclude.Length !=0 )
             {
-                fullPathToFile.Add(currentDirInclude[0].Name);
-              //  return false;
+                listOfDirs.Add(CurrentDirInclude[0].Name);            
             }
             else
             {
                currentFileInDir = di.GetFiles();
-               if(currentFileInDir.Length != 0)
-                for (int i = 0; i < currentFileInDir.Length; i++)
+                if (currentFileInDir.Length != 0)
                 {
-                 if(FileDateYear(currentFileInDir[i].FullName) == 2020 )
-                   if(currentTime.DayOfYear - (FileDateDay(currentFileInDir[i].FullName)) < 14 )
+                    for (int i = 0; i < currentFileInDir.Length; i++)
                     {
-                      FileName.Add(currentFileInDir[i].Name);
-                     
+                        if (FileDateYear(currentFileInDir[i].FullName) == DateTime.Today.Year)
+                            if (currentTime.DayOfYear - (FileDateDay(currentFileInDir[i].FullName)) < 14)
+                            {
+                                FileName.Add(currentFileInDir[i].Name);                               
+                            }
                     }
+                   
+                   
                 }
                
             }
@@ -73,26 +82,34 @@ namespace SearchFile
                 return false;
         }
 
-        public  bool SearchDesktop(string pathOfUserDir)
+         public void  DirS(string path)
         {
-            string[] dirs = Directory.GetDirectories(pathOfUserDir);
-            foreach (string item in dirs)
+            try
             {
-                TempPath = item;
-                if (item != DirNotPermission)
-                {
-                    string[] pathDirInside = Directory.GetDirectories(item);
-                    foreach (var s in pathDirInside)
+                foreach (string item in Directory.GetDirectories(path))
+                {                 
+                    try
                     {
-                        if (s.Contains("Desktop"))
+                       foreach (string s in Directory.GetFiles(item))
                         {
-                            PathDesktop = Path.Combine(pathOfUserDir, "Desktop");
-                            return false;
+                            if (FileDateYear(s) == DateTime.Today.Year)
+                                if (currentTime.DayOfYear - (FileDateDay(s)) < 14)
+                                {
+                                    FileName.Add(s);
+                                    Console.WriteLine(s);
+                                    countFiles++;
+                                }
+                            FileName.Add(s);
+                            Console.WriteLine(s);
                         }
                     }
+                    catch (Exception) {}                                                          
+                    DirS(item);                                 
                 }
             }
-            return true;
-        }
+             catch (Exception)
+            {                         
+            }
+        }       
     }
 }

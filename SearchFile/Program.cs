@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+
 namespace SearchFile
 {
     class Program
@@ -11,62 +12,54 @@ namespace SearchFile
           
        
         static void Main(string[] args)
-        {
-                              
-            string pathDesk;
-            bool searchDesktop = true;
-           
-            string currentPathFile = "";
-            string currentPathDir = "";
+        {                                                  
             string systemPath = Environment.GetFolderPath(Environment.SpecialFolder.System);
-            string pathOfUserDir = Path.Combine (Path.GetPathRoot(systemPath), "Users");
-            currentPathDir = @"C:\1Projects";
-           
-            var sd = new DirSearch();
-            while (searchDesktop)
-            {
-                try
-                {
-                    searchDesktop = sd.SearchDesktop(pathOfUserDir);
-                    pathDesk = sd.PathDesktop;
-                }
-                catch (UnauthorizedAccessException)
-                {
-                    sd.DirNotPermission = sd.TempPath;
-                    continue;
-                }
-            }
-
-            while(!sd.IsFileInclude(currentPathDir))
-            {
-                foreach (var item in sd.FullPathToFile)
-                {
-                    currentPathDir = Path.Combine(currentPathDir, item);
-                }
-            }
+            string pathOfUserDir = Path.Combine (Path.GetPathRoot(systemPath), "Users",Environment.UserName);
+            string pathDesk = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             
+            string currentPathDir = @"C:\FTDI driver 2.8.14";
+            
+            var sd = new DirSearch();
+            Console.WriteLine("Идет сканирование...");
+            sd.DirS(currentPathDir);
+            Console.WriteLine("Конец"); 
+            Console.WriteLine("Количество файлов: "+sd.countFiles);
 
-            Console.ReadLine();
-            //try
+            FileInfo outputFile = new FileInfo(Path.Combine(pathDesk, "Myshnev.txt"));
+            using (outputFile.Open(FileMode.OpenOrCreate))
+            {
+
+            }
+            using (StreamWriter str = new StreamWriter(Path.Combine(pathDesk, "Myshnev.txt")))
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    
+                    string[] s= sd.FileName[i].Split('\\');
+                    string tab = "";
+                    foreach (var item in s)
+                    {
+                        
+                        str.WriteLine(tab + item);                                                
+                        tab += "   ";                        
+                     
+                    }
+                   
+                }
+                
+            }
+            //while (!sd.IsFileInclude(currentPathDir))
             //{
-            //    string[] fiels = Directory.GetFiles(pathDesktop);
-            //    foreach (string s in fiels)
+            //    currentPathDir = sd.CurrentDirInclude[0].FullName;
+            //    foreach (var item in sd.ListOfDirs)
             //    {
-            //        Console.WriteLine(s);
+            //        currentPathDir = Path.Combine(currentPathDir, item);
             //    }
             //}
-            //catch (UnauthorizedAccessException)
-            //{
 
-            //    Console.WriteLine("no accsept");
-            //}
-            // var tm = dirInfo.CreationTime.DayOfYear;
 
-            // Console.WriteLine(tm);
-            //// Console.WriteLine($"dir together: {dirInfo.GetDirectories(dirName)}");
-            // Console.WriteLine($"Полное название каталога: {dirInfo.FullName}");
-            // Console.WriteLine($"Время создания каталога: {dirInfo.CreationTime}");
-            // Console.WriteLine($"Корневой каталог: {dirInfo.Root}");
+            Console.ReadLine();
+           
 
         }
     }
