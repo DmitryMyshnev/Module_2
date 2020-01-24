@@ -24,8 +24,7 @@ namespace SearchFile
             sd.DirS(currentPathDir);
             Console.WriteLine("Конец"); 
             Console.WriteLine("Количество файлов: "+sd.countFiles);
-
-            
+           
             Console.ReadLine();
            
 
