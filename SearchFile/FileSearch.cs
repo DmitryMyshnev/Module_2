@@ -10,8 +10,7 @@ using System.IO;
 namespace SearchFile
 {
     class FileSearch
-    {
-        
+    {       
         private List<string> fileName;      
         private  string pathDesk;
        
@@ -42,13 +41,10 @@ namespace SearchFile
             return yars;
         }
         public void WriteToFile(string path,List<string> file)
-        {
-            
+        {           
             using (FileStream str = new FileStream(Path.Combine(pathDesk, "Myshnev.txt"), FileMode.Append))
-            {
-               
-                string[] tmp = path.Split('\\');
-                //string[] arrOldPath  = oldPath.Split('\\');                           
+            {            
+                string[] tmp = path.Split('\\');                                        
                 byte[] input;               
                 long pos = 0;
                 if (file.Count != 0)
