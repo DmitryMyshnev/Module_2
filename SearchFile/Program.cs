@@ -17,10 +17,10 @@ namespace SearchFile
             string pathOfUserDir = Path.Combine (Path.GetPathRoot(systemPath), "Users",Environment.UserName);
            
             
-            string currentPathDir = @"C:\FTDI driver 2.8.14";
+            string currentPathDir = @"C:\Users\Dmitry\Desktop";
             
             var sd = new DirSearch();
-            Console.WriteLine("Идет сканирование...");
+           // Console.WriteLine("Идет сканирование...");
             sd.DirS(currentPathDir);
             Console.WriteLine("Конец"); 
             Console.WriteLine("Количество файлов: "+sd.countFiles);

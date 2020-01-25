@@ -11,27 +11,23 @@ namespace SearchFile
     {
         private string tempPath;
         private string dirNotPermission;
-        private string pathDesktop;
+        
         private List<string> listOfDirs;
         private DirectoryInfo[] currentDirInclude;
         private FileInfo[] currentFileInDir;
         private DateTime currentTime;
         public int countFiles;
         public int countDirs;
-        string pathDesk;
+       
 
 
         public DirSearch() : base()
         {
             listOfDirs = new List<string>();
-            pathDesk = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+           
         }
 
-        public string PathDesktop
-        {
-            get => pathDesktop;
-            set => pathDesktop = value;
-        }
+       
         public string DirNotPermission 
         {
             get => dirNotPermission; 
@@ -62,13 +58,14 @@ namespace SearchFile
                     //if (FileDateYear(s) == DateTime.Today.Year)
                     //    if (currentTime.DayOfYear - (FileDateDay(s)) < 14)
                     //    {
-                    //        FileName.Add(s);
+                    //       
                     //        Console.WriteLine(s);                           
                     //    }
-                    Console.WriteLine(s);
-                    WriteToFile(s, pathDesk);
-                    
+                   // Console.WriteLine(s);
+                   FileName.Add(s);
+                                     
                 }
+                WriteToFile(path, FileName); 
                 foreach (string item in Directory.GetDirectories(path))
                 {                                                                                           
                     DirS(item);                                 

@@ -12,11 +12,19 @@ namespace SearchFile
     {
         private FileInfo[] fileByPath;
         private List<string> fileName;
+        
+        string pathDesk;
+        private string pathDesktop;
         public FileSearch()
         {
-            fileName = new List<string>();           
+            fileName = new List<string>(); 
+             pathDesk = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         }
-
+        public string PathDesktop
+        {
+            get => pathDesktop;
+            set => pathDesktop = value;
+        }
         public FileInfo[] FileByPath
         { 
             get => fileByPath;
@@ -42,22 +50,20 @@ namespace SearchFile
             int.TryParse(fi.CreationTime.Year.ToString(), out yars);
             return yars;
         }
-        public void WriteToFile(string path, string pathDesk)
+        public void WriteToFile(string path,List<string> file)
         {          
             using (FileStream str = new FileStream(Path.Combine(pathDesk, "Myshnev.txt"), FileMode.Append))
             {                
                 string[] tmp = path.Split('\\');
-                byte[] input;
-                var f = str.Position;
+                byte[] input;               
+                long t = 0;
                 for (int i = 0; i < tmp.Length; i++)
-                {
-                   
-                   input = Encoding.Default.GetBytes(Tab(str.Position - f) + tmp[i] + "\n");
-                   //Console.Write(Tab(tmp[Math.Abs(i-1)].Length) + tmp[i] + "\n");
+                {                   
+                    str.Seek(t, SeekOrigin.Current);                  
+                    input = Encoding.Default.GetBytes(tmp[i] + "\n");  
+                    t += input.Length-1;
                     str.Write(input, 0, input.Length);
-                   
-                }
-              
+                }            
              }
         }
        private string Tab(long lenght)
